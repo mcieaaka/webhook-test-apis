@@ -1,6 +1,7 @@
 const express = require('express');
 const body_parser = require('body-parser');
-const body_parser_xml = require('body-parser-xml');
+// const body_parser_xml = require('body-parser-xml');
+// const xmlparser = require('express-xml-bodyparser');
 const app = express();
 const PORT = process.env.PORT || 4000;
 
@@ -8,9 +9,12 @@ const PORT = process.env.PORT || 4000;
 var last_json_data = {};
 var last_xml_data = '';
 
-body_parser_xml(body_parser);
-app.use(body_parser.xml());
+// app.use(xmlparser());
+
+// body_parser_xml(body_parser);
 app.use(body_parser.json());
+// app.use(body_parser.xml());
+app.use(body_parser.text({ type: 'application/xml' }));
 
 // JSON APIs
 app.get("/test-invoice-webhook/json", (_req, res) => {
